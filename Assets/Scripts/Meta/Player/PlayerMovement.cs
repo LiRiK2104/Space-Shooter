@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Core.Player
+namespace Meta.Player
 {
     [RequireComponent(typeof(PlayerMovementZone))]
     public class PlayerMovement : MonoBehaviour
@@ -8,11 +8,13 @@ namespace Core.Player
         [SerializeField, Range(0.1f, 10)] private float speed;
 
         private PlayerMovementZone _movementZone;
+        private Renderer _renderer;
 
     
         private void Awake()
         {
             _movementZone = GetComponent<PlayerMovementZone>();
+            _renderer = GetComponent<Renderer>();
         }
 
         private void Update()
@@ -30,7 +32,7 @@ namespace Core.Player
             Vector3 offset = direction * (Time.deltaTime * speed);
 
             transform.position = _movementZone.GetClampedPosition(
-                transform.position + offset, transform.localScale);
+                transform.position + offset, _renderer.bounds.size);
         }
     }
 }

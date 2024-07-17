@@ -1,10 +1,9 @@
-using System;
 using Core.Services.Screen;
 using Helpers.Screen;
 using UnityEngine;
 using Zenject;
 
-namespace Core.Player
+namespace Meta.Player
 {
     public class PlayerMovementZone : MonoBehaviour
     {

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4702a3058b674448e61eb4661ce51f, type: 3}
+  m_Name: BackgroundPreset 2
+  m_EditorClassIdentifier: 
+  color: {r: 0.050234895, g: 0, b: 0.09411765, a: 0}
+  dust: {fileID: 21300000, guid: 69a5ff7ad61f9144ba3c3b6c40759a9e, type: 3}
+  nebulae: {fileID: 21300000, guid: 140531fc59df4df4db305ba2c847ca49, type: 3}
+  planets: {fileID: 21300000, guid: b8a600d07ec14624e9cec56f21efc382, type: 3}
+  stars: {fileID: 21300000, guid: 58dc77fbc8a769b43bc824a23739f167, type: 3}
