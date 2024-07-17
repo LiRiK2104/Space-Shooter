@@ -7,7 +7,7 @@ namespace Core.Services.PoolService
 {
     public class Pool : MonoBehaviour
     {
-        private readonly Dictionary<ObjectType, Stack<SpawnableObject>> _localPools = new();
+        private readonly Dictionary<ObjectType, LocalPool> _localPools = new();
 
         private DiContainer _diContainer;
         
@@ -21,13 +21,14 @@ namespace Core.Services.PoolService
         
         public void Spawn(SpawnableObject template, Vector2 position, Quaternion rotation)
         {
-            if (_localPools.TryGetValue(template.Type, out Stack<SpawnableObject> localPool) == false)
+            if (_localPools.TryGetValue(template.Type, out LocalPool localPool) == false)
             {
-                Create(template, position, rotation);
+                localPool = CreateLocalPool(template.Type);
+                Create(template, position, rotation, localPool);
             }
-            else if (localPool.TryPop(out SpawnableObject instance) == false)
+            else if (localPool.Stack.TryPop(out SpawnableObject instance) == false)
             {
-                Create(template, position, rotation);
+                Create(template, position, rotation, localPool);
             }
         }
 
@@ -35,22 +36,31 @@ namespace Core.Services.PoolService
         {
             if (_localPools.Keys.Contains(spawnableObject.Type) == false)
             {
-                _localPools.Add(spawnableObject.Type, new Stack<SpawnableObject>());
+                CreateLocalPool(spawnableObject.Type);
             }
             
             foreach (var localPool in _localPools)
             {
                 if (localPool.Key == spawnableObject.Type)
                 {
-                    localPool.Value.Push(spawnableObject);
+                    localPool.Value.Stack.Push(spawnableObject);
                 }
             }
         }
 
-        private void Create(SpawnableObject template, Vector2 position, Quaternion rotation)
+        private LocalPool CreateLocalPool(ObjectType objectType)
+        {
+            LocalPool localPool = new (objectType);
+            
+            _localPools.Add(objectType, localPool);
+
+            return localPool;
+        }
+
+        private void Create(SpawnableObject template, Vector2 position, Quaternion rotation, LocalPool localPool)
         {
             _diContainer.InstantiatePrefabForComponent<SpawnableObject>
-                (template, position, rotation, null);
+                (template, position, rotation, localPool.Parent.transform);
         }
     }
 }

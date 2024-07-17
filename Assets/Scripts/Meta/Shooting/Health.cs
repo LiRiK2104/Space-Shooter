@@ -6,12 +6,14 @@ namespace Meta.Shooting
     public class Health : MonoBehaviour, IDamagable
     {
         [SerializeField] private int healthPoints;
-        [SerializeField] private ParticleSystem deathEffect;
+        [SerializeField] private bool resetOnEnable = true;
 
         private int _maxHealth;
         
-        public event Action DamageGet;
+        public event Action<Vector2> DamageGet;
+        public event Action Died;
         
+        public Vector2 Position => transform.position;
         public int HealthPoints => healthPoints;
         public float Percent => healthPoints / (float)_maxHealth;
 
@@ -21,28 +23,31 @@ namespace Meta.Shooting
             _maxHealth = healthPoints;
         }
 
-
-        public void GetDamage(IAttackable attackable)
+        private void OnEnable()
         {
-            healthPoints -= attackable.Damage;
-            
-            DamageGet?.Invoke();
-
-            if (healthPoints <= 0)
+            if (resetOnEnable)
             {
-                Death();
+                healthPoints = _maxHealth;   
             }
         }
 
-        private void Death()
+
+        public void GetDamage(IAttackable attackable, Vector2 hitPosition)
         {
-            gameObject.SetActive(false);
-            PlayDeathEffect();
+            healthPoints -= attackable.Damage;
+            
+            DamageGet?.Invoke(hitPosition);
+
+            if (healthPoints <= 0)
+            {
+                Die();
+            }
         }
-        
-        private void PlayDeathEffect()
+
+        public void Die()
         {
-            Instantiate(deathEffect, transform.position, Quaternion.identity, null);
+            Died?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }

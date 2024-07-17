@@ -22,7 +22,12 @@ namespace Meta.Shooting
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, radius);
         }
-        
+
+        private void Update()
+        {
+            transform.rotation = Quaternion.identity;
+        }
+
 
         public bool TryGetClosest(out Transform closestTarget)
         {

@@ -3,12 +3,16 @@ using Helpers.Screen;
 using UnityEngine;
 using Zenject;
 
-namespace Meta.Player
+namespace Meta
 {
-    public class PlayerMovementZone : MonoBehaviour
+    public class ScreenZone : MonoBehaviour
     {
-        [SerializeField, Range(0.1f, 1)] private float heightPercent;
+        [SerializeField, Range(0.1f, 1)] 
+        private float heightPercent;
 
+        [SerializeField] 
+        private Color gizmosColor = Color.yellow;
+        
         private ScreenWorldSpaceData _screenWorldSpaceData;
         private ScreenResizeDetector _screenResizeDetector;
 
@@ -21,6 +25,11 @@ namespace Meta.Player
         {
             _screenResizeDetector = screenResizeDetector;
         }
+        
+        private void Awake()
+        {
+            UpdateScreenData();
+        }
 
         private void OnEnable()
         {
@@ -32,16 +41,12 @@ namespace Meta.Player
             _screenResizeDetector.ScreenSizeChanged -= UpdateScreenData;
         }
 
-        private void Start()
-        {
-            UpdateScreenData();
-        }
 
         private void OnDrawGizmos()
         {
             UpdateScreenData();
 
-            Gizmos.color = Color.yellow;
+            Gizmos.color = gizmosColor;
             Gizmos.DrawWireCube(_screenWorldSpaceData.Center, _screenWorldSpaceData.Size);
         }
 
@@ -55,6 +60,19 @@ namespace Meta.Player
 
             float clampedX = Mathf.Clamp(playerPosition.x, min.x, max.x);
             float clampedY = Mathf.Clamp(playerPosition.y, min.y, max.y);
+
+            return new Vector2(clampedX, clampedY);
+        }
+        
+        public Vector2 GetRandomClampedPosition(Vector2 playerSize)
+        {
+            Vector2 playerHalfSize = playerSize / 2;
+
+            Vector2 min = _screenWorldSpaceData.Min + playerHalfSize;
+            Vector2 max = _screenWorldSpaceData.Max - playerHalfSize;
+
+            float clampedX = Random.Range(min.x, max.x);
+            float clampedY = Random.Range(min.y, max.y);
 
             return new Vector2(clampedX, clampedY);
         }

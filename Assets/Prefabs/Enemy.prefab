@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 8351449008311990849}
   - component: {fileID: 4068718911877487013}
   - component: {fileID: 280456779547760483}
+  - component: {fileID: 6562723692705118428}
   - component: {fileID: 5687472103749912272}
+  - component: {fileID: 964870578817540924}
   - component: {fileID: 8858667445929971805}
   - component: {fileID: 4568016959351494688}
   - component: {fileID: 8477567492296426550}
@@ -129,8 +131,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ef28faff584bc6a7a1eb7fc3249f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 10
-  deathEffect: {fileID: 8246148989050675140, guid: 8bdb85ccf597d0f4f8a38abecfdf0590, type: 3}
+  healthPoints: 8
+  resetOnEnable: 1
+--- !u!114 &6562723692705118428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805104293361333543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2df8e3f4d20a44995db80fcef2f05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  killSelfOnAttack: 1
+  disableOnAttack: 0
 --- !u!114 &5687472103749912272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +160,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcebbac678905364f818c372b0d4f19a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagable:
+    _underlyingValue: {fileID: 280456779547760483}
+--- !u!114 &964870578817540924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805104293361333543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795dfe5aa7794834e8127ac7f1f9ee91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectTemplate: {fileID: 8246148989050675140, guid: 8bdb85ccf597d0f4f8a38abecfdf0590, type: 3}
+  setParent: 0
   damagable:
     _underlyingValue: {fileID: 280456779547760483}
 --- !u!95 &8858667445929971805
@@ -219,14 +252,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7805104293361333543}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

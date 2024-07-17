@@ -26,8 +26,8 @@ namespace Meta.Player
 
         private void UpdateAnimation()
         {
-            const float minHealthValue = 1;
-            const float maxHealthValue = 0;
+            const float minHealthValue = 0;
+            const float maxHealthValue = 1;
             
             float blendValue = Mathf.Lerp(minHealthValue, maxHealthValue, _health.Percent);
         

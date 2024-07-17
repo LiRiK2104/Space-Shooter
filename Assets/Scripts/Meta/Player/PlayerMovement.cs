@@ -2,18 +2,18 @@ using UnityEngine;
 
 namespace Meta.Player
 {
-    [RequireComponent(typeof(PlayerMovementZone))]
+    [RequireComponent(typeof(ScreenZone))]
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField, Range(0.1f, 10)] private float speed;
 
-        private PlayerMovementZone _movementZone;
+        private ScreenZone _movementZone;
         private Renderer _renderer;
 
     
         private void Awake()
         {
-            _movementZone = GetComponent<PlayerMovementZone>();
+            _movementZone = GetComponent<ScreenZone>();
             _renderer = GetComponent<Renderer>();
         }
 

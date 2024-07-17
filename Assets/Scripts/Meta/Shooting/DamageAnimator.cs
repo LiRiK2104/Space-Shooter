@@ -29,7 +29,7 @@ namespace Meta.Shooting
         }
     
 
-        private void PlayDamage()
+        private void PlayDamage(Vector2 _)
         {
             _animator.SetTrigger(HitTrigger);
         }

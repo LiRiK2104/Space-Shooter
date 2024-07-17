@@ -196,7 +196,7 @@ BlendTree:
   m_Name: Health Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -572488063756603733}
+    m_Motion: {fileID: -4890614857816377199}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -204,7 +204,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -2933475745239131960}
+    m_Motion: {fileID: 1602101160834933579}
     m_Threshold: 0.33333334
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -212,7 +212,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1602101160834933579}
+    m_Motion: {fileID: -2933475745239131960}
     m_Threshold: 0.6666667
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -220,7 +220,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -4890614857816377199}
+    m_Motion: {fileID: -572488063756603733}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3218979774088574222}
   - component: {fileID: 4406681809287379867}
   - component: {fileID: 156722976032499585}
+  - component: {fileID: 2109141410423955226}
+  - component: {fileID: 9140841695556328461}
   - component: {fileID: 2721667296264293755}
   - component: {fileID: 8133259680617778718}
   - component: {fileID: 400449844326548232}
@@ -114,9 +116,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a1d4f5099e14fc888d334ad75684416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
   speed: 8
-  hitEffectTemplate: {fileID: 8246148989050675140, guid: ddd777ed7593be0498ca9fffcc2a8747, type: 3}
+--- !u!114 &2109141410423955226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180610016466473557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2df8e3f4d20a44995db80fcef2f05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  killSelfOnAttack: 0
+  disableOnAttack: 1
+--- !u!114 &9140841695556328461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180610016466473557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4d9a7ad7764d09abd50122daa348a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectTemplate: {fileID: 8246148989050675140, guid: ddd777ed7593be0498ca9fffcc2a8747, type: 3}
+  setParent: 0
+  attackable:
+    _underlyingValue: {fileID: 2109141410423955226}
 --- !u!95 &2721667296264293755
 Animator:
   serializedVersion: 5
