@@ -17,19 +17,37 @@ namespace Core.Services.PoolService
         {
             _diContainer = diContainer;
         }
-        
-        
+
+
         public void Spawn(SpawnableObject template, Vector2 position, Quaternion rotation)
+        {
+            Spawn(template, position, rotation, out bool _);
+        }
+
+        public SpawnableObject Spawn(SpawnableObject template, Vector2 position, Quaternion rotation, out bool isCreated)
         {
             if (_localPools.TryGetValue(template.Type, out LocalPool localPool) == false)
             {
                 localPool = CreateLocalPool(template.Type);
-                Create(template, position, rotation, localPool);
+                isCreated = true;
+                
+                return Create(template, position, rotation, localPool);
             }
-            else if (localPool.Stack.TryPop(out SpawnableObject instance) == false)
+            
+            if (localPool.Stack.TryPop(out SpawnableObject instance) == false)
             {
-                Create(template, position, rotation, localPool);
+                isCreated = true;
+                instance = Create(template, position, rotation, localPool);
             }
+            else
+            {
+                isCreated = false;
+            }
+            
+            instance.gameObject.SetActive(true);
+            instance.transform.SetPositionAndRotation(position, rotation);
+
+            return instance;
         }
 
         public void Add(SpawnableObject spawnableObject)
@@ -57,9 +75,9 @@ namespace Core.Services.PoolService
             return localPool;
         }
 
-        private void Create(SpawnableObject template, Vector2 position, Quaternion rotation, LocalPool localPool)
+        private SpawnableObject Create(SpawnableObject template, Vector2 position, Quaternion rotation, LocalPool localPool)
         {
-            _diContainer.InstantiatePrefabForComponent<SpawnableObject>
+            return _diContainer.InstantiatePrefabForComponent<SpawnableObject>
                 (template, position, rotation, localPool.Parent.transform);
         }
     }

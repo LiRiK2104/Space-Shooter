@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bee9a3cbdd13b0489727640e684786d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingInterval: 0.182
+  shootingInterval: 0.239
   shootPoint: {fileID: 4089739062679767534}
   radar: {fileID: 3479082342157886995}
   bulletTemplate: {fileID: 4406681809287379867, guid: 4aeb8b9543f052c4fb22d470648e24bd, type: 3}

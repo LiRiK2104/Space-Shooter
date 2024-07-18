@@ -27,7 +27,9 @@ namespace Core.Services.PoolService
         private Color gizmosColor = Color.red;
 
         private Pool _pool;
-        
+
+        public event Action<SpawnableObject, bool> Spawned; 
+
 
         [Inject]
         private void Construct(Pool pool)
@@ -77,6 +79,8 @@ namespace Core.Services.PoolService
         {
             while (leftSpawnsCount > 0)
             {
+                print(leftSpawnsCount);
+                
                 float interval = Random.Range(spawnIntervalRange.x, spawnIntervalRange.y);
 
                 yield return new WaitForSeconds(interval);
@@ -86,7 +90,9 @@ namespace Core.Services.PoolService
                 Vector3 eulerRotation = new (0, 0, 180);
                 Quaternion startRotation = Quaternion.Euler(eulerRotation);
 
-                _pool.Spawn(template, spawnPoint, startRotation);
+                SpawnableObject spawnableObject = _pool.Spawn(template, spawnPoint, startRotation, out bool isCreated);
+                
+                Spawned?.Invoke(spawnableObject, isCreated);
                 
                 leftSpawnsCount--;
             }

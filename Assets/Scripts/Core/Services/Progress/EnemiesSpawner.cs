@@ -13,8 +13,9 @@ namespace Core.Services.Progress
         private Vector2 targetEnemiesCountRange;
 
         private Spawner _spawner;
-        private int _killedEnemies = 0;
         
+        public event Action<SpawnableObject, bool> Spawned;
+
         public int TargetEnemiesCount { get; private set; }
 
 
@@ -27,9 +28,25 @@ namespace Core.Services.Progress
                 Mathf.CeilToInt(targetEnemiesCountRange.y));
         }
 
+        private void OnEnable()
+        {
+            _spawner.Spawned += InvokeSpawned;
+        }
+        
+        private void OnDisable()
+        {
+            _spawner.Spawned -= InvokeSpawned;
+        }
+
         private void Start()
         {
             _spawner.StartSpawn(TargetEnemiesCount);
+        }
+
+
+        private void InvokeSpawned(SpawnableObject spawnableObject, bool isCreated)
+        {
+            Spawned?.Invoke(spawnableObject, isCreated);
         }
     }
 }
