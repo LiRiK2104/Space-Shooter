@@ -16,6 +16,7 @@ namespace Core.Services.Progress
         private int _killedEnemies;
     
         public event Action Changed;
+        public event Action AllKilled;
 
         public float Percent => _killedEnemies / (float)_enemiesSpawner.TargetEnemiesCount;
 
@@ -65,6 +66,11 @@ namespace Core.Services.Progress
             _killedEnemies++;
             
             Changed?.Invoke();
+
+            if (Percent >= 1)
+            {
+                AllKilled?.Invoke();
+            }
         }
     }
 }
